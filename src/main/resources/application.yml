@@ -1,0 +1,36 @@
+server:
+  port: 9000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8083/eureka
+
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: system-management
+          uri: lb://SYSTEM-MANAGEMENT/
+          predicates:
+            - Path=/api/systemManagement/**
+        - id: doctor-logic
+          uri: http://localhost:8010/
+          predicates:
+            - Path=/api/doctorLogicManagement/**
+        - id: patient-logic
+          uri: http://localhost:8020/
+          predicates:
+            - Path=/api/patientLogicManagement/**
+        - id: conversation-management
+          uri: http://localhost:8000/
+          predicates:
+            - Path=/api/conversationManagement/**
+        - id: appointment-management
+          uri: http://localhost:8030/
+          predicates:
+            - Path=/api/appointmentManagement/**
+
+  application:
+    name: gateway-api-service
