@@ -10,7 +10,16 @@ eureka:
 spring:
   cloud:
     gateway:
-      routes:
+      - globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders:
+              - content-type
+            allowedMethods:
+              - GET
+              - POST
+      - routes:
         - id: system-management
           uri: lb://SYSTEM-MANAGEMENT/
           predicates:
@@ -32,6 +41,7 @@ spring:
           uri: http://localhost:8030/
           predicates:
             - Path=/api/appointmentManagement/**
+
 
   application:
     name: gateway-api-service
