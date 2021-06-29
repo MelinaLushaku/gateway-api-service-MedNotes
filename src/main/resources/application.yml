@@ -10,39 +10,45 @@ eureka:
 spring:
   cloud:
     gateway:
-      - globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedHeaders:
-              - content-type
-            allowedMethods:
-              - GET
-              - POST
-      - routes:
+      routes:
         - id: system-management
-          uri: lb://SYSTEM-MANAGEMENT/
+          uri: http://localhost:8090/
+          filters:
+            - SetStatus=401
           predicates:
-            - Path=/api/systemManagement/**
-            - Method=GET,POST
+          - Path=/api/systemManagement/**
+          - Method=GET,POST
         - id: doctor-logic
           uri: http://localhost:8010/
+          filters:
+            - SetStatus=401
           predicates:
-            - Path=/api/doctorLogicManagement/**
+          - Path=/api/doctorLogicManagement/**
+          - Method=GET,POST
         - id: patient-logic
           uri: http://localhost:8020/
           predicates:
-            - Path=/api/patientLogicManagement/**
+          - Path=/api/patientLogicManagement/**
+          - Method=GET,POST
         - id: conversation-management
           uri: http://localhost:8000/
           predicates:
-            - Path=/api/conversationManagement/**
+          - Path=/api/conversationManagement/**
+          - Method=GET,POST
         - id: appointment-management
           uri: http://localhost:8030/
           predicates:
-            - Path=/api/appointmentManagement/**
-
-
+          - Path=/api/appointmentManagement/**
+          - Method=GET,POST
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
   application:
     name: gateway-api-service
 
