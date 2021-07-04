@@ -12,31 +12,29 @@ spring:
     gateway:
       routes:
         - id: system-management
-          uri: http://localhost:8090/
+          uri: lb://SYSTEM-MANAGEMENT/
           filters:
             - SetStatus=401
           predicates:
           - Path=/api/systemManagement/**
           - Method=GET,POST
         - id: doctor-logic
-          uri: http://localhost:8010/
-          filters:
-            - SetStatus=401
+          uri: lb://DOCTOR-LOGIC/
           predicates:
           - Path=/api/doctorLogicManagement/**
           - Method=GET,POST
         - id: patient-logic
-          uri: http://localhost:8020/
+          uri: lb://PATIENT-LOGIC/
           predicates:
           - Path=/api/patientLogicManagement/**
           - Method=GET,POST
         - id: conversation-management
-          uri: http://localhost:8000/
+          uri: lb://CONVERSATION-MANAGEMENT/
           predicates:
           - Path=/api/conversationManagement/**
           - Method=GET,POST
         - id: appointment-management
-          uri: http://localhost:8030/
+          uri: lb://APPOINTMENT-MANAGEMENT/
           predicates:
           - Path=/api/appointmentManagement/**
           - Method=GET,POST
