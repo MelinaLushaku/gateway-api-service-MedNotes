@@ -28,16 +28,7 @@ spring:
           predicates:
           - Path=/api/patientLogicManagement/**
           - Method=GET,POST
-        - id: conversation-management
-          uri: lb://CONVERSATION-MANAGEMENT/
-          predicates:
-          - Path=/api/conversationManagement/**
-          - Method=GET,POST
-        - id: appointment-management
-          uri: lb://APPOINTMENT-MANAGEMENT/
-          predicates:
-          - Path=/api/appointmentManagement/**
-          - Method=GET,POST
+
       globalcors:
         cors-configurations:
           '[/**]':
