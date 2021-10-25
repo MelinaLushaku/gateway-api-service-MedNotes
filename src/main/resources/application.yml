@@ -11,33 +11,17 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: system-management
-          uri: lb://SYSTEM-MANAGEMENT/
-          filters:
-            - SetStatus=401
+        - id: userManagementService
+          uri: http://localhost:8010/
           predicates:
-          - Path=/api/systemManagement/**
+          - Path=/api/firstModule/userService/**
           - Method=GET,POST
         - id: doctor-logic
-          uri: lb://DOCTOR-LOGIC/
+          uri: http://localhost:8020/
           predicates:
-          - Path=/api/doctorLogicManagement/**
+          - Path=/api/secondModule/appointment/**
           - Method=GET,POST
-        - id: patient-logic
-          uri: lb://PATIENT-LOGIC/
-          predicates:
-          - Path=/api/patientLogicManagement/**
-          - Method=GET,POST
-        - id: conversation-management
-          uri: lb://CONVERSATION-MANAGEMENT/
-          predicates:
-          - Path=/api/conversationManagement/**
-          - Method=GET,POST
-        - id: appointment-management
-          uri: lb://APPOINTMENT-MANAGEMENT/
-          predicates:
-          - Path=/api/appointmentManagement/**
-          - Method=GET,POST
+
       globalcors:
         cors-configurations:
           '[/**]':
