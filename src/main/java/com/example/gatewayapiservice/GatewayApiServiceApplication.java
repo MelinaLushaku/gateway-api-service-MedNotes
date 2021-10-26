@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @SpringBootApplication
 @EnableEurekaClient
 public class GatewayApiServiceApplication {
-
+//shto git
     public static void main(String[] args) {
         SpringApplication.run(GatewayApiServiceApplication.class, args);
     }
